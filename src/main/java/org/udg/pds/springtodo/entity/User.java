@@ -46,7 +46,7 @@ public class User implements Serializable {
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
   private Collection<Group> groups;
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Collection<Group> member_groups = new ArrayList<>();
 
   @JsonView(Views.Private.class)
@@ -100,7 +100,7 @@ public class User implements Serializable {
         member_groups.add(group);
     }
 
-  @JsonView(Views.Complete.class)
+  @JsonView(Views.Private.class)
   public Collection<Group> getMemberGroups() {
       member_groups.size();
       return member_groups;
